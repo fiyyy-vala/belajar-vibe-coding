@@ -1,10 +1,10 @@
-import { mysqlTable, serial, varchar, timestamp } from "drizzle-orm/mysql-core";
+import { int, mysqlTable, varchar, timestamp } from "drizzle-orm/mysql-core";
 
-// Sample schema definition
 export const users = mysqlTable("users", {
-  id: serial("id").primaryKey(),
+  id: int("id").autoincrement().primaryKey(),
   name: varchar("name", { length: 255 }).notNull(),
   email: varchar("email", { length: 255 }).notNull().unique(),
+  password: varchar("password", { length: 255 }).notNull(), // bcrypt hash
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
